@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/powershell
+{
+    "name": "Bicep templates and modules development",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "pwsh",
+                "terminal.integrated.profiles.linux": {
+                    "pwsh": {
+                        "path": "/opt/microsoft/powershell/7/pwsh"
+                    }
+                }
+            },
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "bewhite.psrule-vscode-preview",
+                "msazurermtools.azurerm-vscode-tools",
+                "ms-azuretools.vscode-bicep",
+                "ms-vscode.powershell",
+                "ms-azuretools.vscode-azureresourcegroups",
+                "editorconfig.editorconfig",
+                "esbenp.prettier-vscode",
+                "bencoleman.armview",
+                "ms-vscode.azurecli"
+            ]
+        }
+    },
+    "features": {
+        "github-cli": "latest",
+        "powershell": "latest",
+        "azure-cli": "latest"
+    },
+    "postCreateCommand": "az bicep install",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "VARIANT": "ubuntu-22.04"
+        }
+    },
+    "remoteUser": "vscode"
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": []
+}
