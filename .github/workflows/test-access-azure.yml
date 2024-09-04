@@ -1,0 +1,34 @@
+name: Test access to Azure
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+env:
+  ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
+  ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
+
+jobs:
+  test-access:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - uses: azure/login@v2.1.1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
+      - name: Azure CLI Action
+        uses: Azure/cli@v2.0.0
+        with:
+          inlineScript: |
+            az resource list
+
+
+
