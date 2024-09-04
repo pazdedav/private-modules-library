@@ -1,0 +1,36 @@
+name: 'Lint and PSRule Analysis'
+description: 'Performs linting and PSRule analysis'
+inputs:
+  moduleFilePath:
+    description: 'Path to the module file'
+    required: true
+  testFilePath:
+    description: 'Path to the test file directory'
+    required: false
+  azureCredentials:
+    description: 'Azure credentials in JSON format'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Lint bicep template
+      run: az bicep build --file ${{ inputs.moduleFilePath }}
+      shell: bash
+
+    - name: Check for "tests" folder in Bash
+      run: |
+        MODULE_DIR_PATH=$(dirname ${{ env.MODULE_FILE_PATH }})
+        if [ -d "${{ github.workspace }}/${MODULE_DIR_PATH}/tests" ]; then
+          echo "testsExist=true" >> $GITHUB_ENV
+        else
+          echo "testsExist=false" >> $GITHUB_ENV
+        fi
+      shell: bash
+
+    - name: Run PSRule analysis
+      if: env.testsExist == 'true'
+      uses: microsoft/ps-rule@v2.9.0 
+      with:
+        modules: PSRule.Rules.Azure # (2)
+        inputPath: ${{ env.testFilePath }}
