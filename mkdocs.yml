@@ -1,0 +1,147 @@
+site_name: Contoso's Module Web Catalogue
+theme:
+  name: material
+  palette:
+    scheme: contoso
+
+    # # Palette toggle for light mode
+    # - scheme: default
+    #   toggle:
+    #     icon: material/brightness-7
+    #     name: Switch to dark mode
+
+    # # Palette toggle for dark mode
+    # - scheme: slate
+    #   toggle:
+    #     icon: material/brightness-4
+    #     name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - search.suggest
+    - navigation.footer
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Pattern Modules:
+    - AVD Baseline: ptn-avdBaseline.md
+    - AVD Insight Monitoring: ptn-avdInsightMonitoring.md
+    - AVD Management Plane: ptn-avdManagementPlane.md
+    - AVD Session Hosts: ptn-avdSessionHosts.md
+    - Azure Policy Assignment Remediation: ptn-azurePolicyAssignmentRemediation.md
+    - Identity: ptn-identity.md
+    - Networking: ptn-networking.md
+    - Storage Azure Files: ptn-storageAzureFiles.md
+    - Zero Trust: ptn-zeroTrust.md
+  - Resource Modules:
+    - Authorization:
+        - Locks:
+            - Main: authorization-locks.md
+            - Resource Group: locks-resourceGroup.md
+            - Subscription: locks-subscription.md
+        - Policy Assignments:
+            - Main: authorization-policyAssignments.md
+            - Resource Group: policyAssignments-resourceGroup.md
+            - Subscription: policyAssignments-subscription.md
+        - Policy Definitions:
+            - Main: authorization-policyDefinitions.md
+            - Subscription: policyDefinitions-subscription.md
+        - Policy Set Definitions:
+            - Main: authorization-policySetDefinitions.md
+            - Subscription: policySetDefinitions-subscription.md
+        - Remediation: authorization-remediation.md
+        - Role Assignments:
+            - Main: authorization-roleAssignments.md
+            - Resource Group: roleAssignments-resourceGroup.md
+            - Subscription: roleAssignments-subscription.md
+    - Compute:
+        - Availability Sets: compute-availabilitySets.md
+        - Disk Encryption Sets: compute-diskEncryptionSets.md
+        - Virtual Machines:
+            - Main: compute-virtualMachines.md
+            - Extensions: virtualMachines-extensions.md
+    - Desktop Virtualization:
+        - Application Groups:
+            - Main: desktopVirtualization-applicationgroups.md
+            - Applications: applicationgroups-applications.md
+        - Host Pools: desktopVirtualization-hostpools.md
+        - Scaling Plans: desktopVirtualization-scalingplans.md
+        - Workspaces: desktopVirtualization-workspaces.md
+    - Key Vault:
+        - Main: res-keyVault.md
+        - Access Policy: keyVault-access-policy.md
+        - Keys: keyVault-keys.md
+        - Secrets: keyVault-secrets.md
+    - Managed Identity:
+        - Main: res-managedIdentity.md
+    - Network:
+        - Application Security Groups: network-applicationSecurityGroups.md
+        - Network Interfaces: network-networkInterfaces.md
+        - Network Security Groups:
+            - Main: network-networkSecurityGroups.md
+            - Security Rules: networkSecurityGroups-securityRules.md
+        - Private Endpoints:
+            - Main: network-privateEndpoints.md
+            - Private DNS Zone Groups: privateEndpoints-privateDnsZoneGroups.md
+        - Public IP Addresses: network-publicIPAddresses.md
+        - Route Tables: network-routeTables.md
+        - Virtual Networks:
+            - Main: network-virtualNetworks.md
+            - Virtual Network Peerings: virtualNetworks-virtualNetworkPeerings.md
+            - Subnets: virtualNetworks-subnets.md
+    - Operational Insights:
+        - Main: res-operationalInsights.md
+        - Data Exports: operationalInsights-dataExports.md
+        - Data Sources: operationalInsights-dataSources.md
+        - Linked Services: operationalInsights-linkedServices.md
+        - Linked Storage Accounts: operationalInsights-linkedStorageAccounts.md
+        - Saved Searches: operationalInsights-savedSearches.md
+        - Storage Insight Configs: operationalInsights-storageInsightConfigs.md
+        - Tables: operationalInsights-tables.md
+    - Operations Management:
+        - Solutions: operationsManagement-solutions.md
+    - Storage:
+        - Storage Account: storage-storageAccount.md
+        - Blob Services: storageAccount-blobServices.md
+        - Blob Services Containers: blobServices-containers.md
+        - Containers:
+            - Immutability Policies: containers-immutabilityPolicies.md
+        - File Services: storageAccount-fileServices.md
+        - File Services Shares: fileServices-shares.md
+        - Local Users: storageAccount-localUsers.md
+        - Management Policies: storageAccount-managementPolicies.md
+    - Recovery Services:
+        - Vaults: recoveryServices-vaults.md
+        - Protection Containers:
+            - Main: vaults-protectionContainers.md
+            - Protected Items: protectionContainers-protectedItems.md
+        - Backup Config: vaults-backupConfig.md
+        - Backup Policies: vaults-backupPolicies.md
+        - Backup Storage Config: vaults-backupStorageConfig.md
+        - Replication Alert Settings: vaults-replicationAlertSettings.md
+        - Replication Fabrics:
+            - Main: vaults-replicationFabrics.md
+            - Fabrics Replication Protection Containers: replicationFabrics-replicationProtectionContainers.md
+            - Protection Containers Mappings: replicationProtectionContainers-replicationProtectionContainerMappings.md
+        - Replication Policies: vaults-replicationPolicies.md
+    - Resources:
+        - Resource Groups: resources-resourceGroups.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  generator: true
+
+
+
+plugins:
+  - search

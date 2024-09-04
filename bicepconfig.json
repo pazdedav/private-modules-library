@@ -1,0 +1,35 @@
+{
+    // See https://aka.ms/bicep/config for more information on Bicep configuration options
+    // Press CTRL+SPACE/CMD+SPACE at any location to see Intellisense suggestions
+    "analyzers": {
+        "core": {
+            "rules": {
+                "no-unused-params": {
+                    "level": "warning"
+                }
+            }
+        }
+    },
+    "moduleAliases": {
+        "ts": {},
+        "br": {
+            "res-modules": {
+                "registry": "modlibbicepreg.azurecr.io",
+                "modulePath": "modules/res"
+            },
+            "ptn-modules": {
+                "registry": "modlibbicepreg.azurecr.io",
+                "modulePath": "modules/ptn"
+            }
+        }
+    },
+    "cloud": {
+        "currentProfile": "AzureCloud",
+        "credentialPrecedence": [
+            "AzureCLI",
+            "AzurePowerShell"
+        ]
+    },
+    "experimentalFeaturesEnabled": {
+    }
+}
