@@ -1,21 +1,18 @@
 <#
 .SYNOPSIS
-    A short one-line action-based description, e.g. 'Tests if a function is valid'
+    A heler script to create a new private module in the modules folder.
 .DESCRIPTION
-    A longer description of the function, its purpose, common use cases, etc.
+    The script creates a new private module in the modules folder. The script copies all files from the _template folder to the new module folder and replaces the placeholder strings with the new module name.
 .NOTES
-    Information or caveats about the function e.g. 'This function is not supported in Linux'
-.LINK
-    Specify a URI to a help page, this will show when Get-Help -Online is used.
+    This script requires PowerShell 7.0 or later.
 .EXAMPLE
-    Test-MyTestFunction -Verbose
-    Explanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines
+    ./scripts/New-PrivateModule.ps1 -ModuleName 'my-new-module' -ModuleType 'ptn'
 #>
 
 [CmdletBinding()]
 param (
     [Parameter(Mandatory)]
-    [ValidatePattern('^[a-z0-9-]{1,20}$')]
+    [ValidatePattern('^[a-z0-9._/-]{1,20}$')]
     [string]$ModuleName,
 
     [Parameter(Mandatory)]
@@ -54,7 +51,7 @@ catch {
     Write-Error "Error copying files from the template folder to the new module folder - $ErrorMessage"
 }
 
-# Edit the workflow definition template file in the new module folder and replace the TEMPLATE_PLACEHOLDER string with the new module name
+# Edit the workflow definition template file in the new module folder and replace the PLACEHOLDER string with the new module name
 Write-Output "Editing the workflow definition file..."
 try {
     $PublishModuleTemplate = Join-Path -Path $NewModuleFolder -ChildPath "module-type-placeholder-publish.yaml"
@@ -71,7 +68,7 @@ try {
 }
 catch {
     $ErrorMessage = $_.Exception.message
-    Write-Error "Error editing the deploy-environment-template.yml file - $ErrorMessage"
+    Write-Error "Error editing the workflow definition yaml file - $ErrorMessage"
 }
 
 
