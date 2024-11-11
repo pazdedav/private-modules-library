@@ -4,7 +4,7 @@ This module deploys a AVD management Plane
 
 !!! info "Module reference (latest tag)"
     ```
-    br:autlibbicepreg.azurecr.io/modules/ptn/avdmanagementplane:
+    br:modlibbicepreg.azurecr.io/modules/ptn/avdmanagementplane:0.1.2
     ```
 
 ## Parameters
