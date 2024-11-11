@@ -7,8 +7,13 @@ param (
     [string]$versionPath
 )
 
-# Fetch the latest tag from Azure Container Registry
-$latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv | Select-Object -First 1
+# Fetch the latest tag from Azure Container Registry with error handling
+try {
+    $latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv | Select-Object -First 1
+} catch {
+    $latestTag = ""
+}
+
 $latestPatchNumber = 0
 
 if ($latestTag -match '(\d+)\.(\d+)\.(\d+)') {
@@ -43,6 +48,6 @@ else {
 
 Write-Host "New version to publish: $newVersion"
 
-# Output the new version for use in Azure DevOps pipeline variables
+# Output the new version for use in ADO pipeline variables
 # Write-Host "##vso[task.setvariable variable=newVersion]$newVersion"
 Write-Output "newVersion=$newVersion" >> $env:GITHUB_ENV
