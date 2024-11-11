@@ -66,8 +66,8 @@ runs:
   
     # Create PR
     - name: Create PR
-       run: |
+      run: |
         gh pr create --title "Automated documentation update - ${{ inputs.repositoryName }}" --body "Automatically generated documentation update." --base main --head feature/documentation-update-${{ github.run_id }}
       shell: bash
       env:
-        GITHUB_TOKEN: $ {{ secret.PAT_TOKEN}}
+        GITHUB_TOKEN: ${{ secret.PAT_TOKEN }}
