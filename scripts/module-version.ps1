@@ -8,11 +8,24 @@ param (
 )
 
 # Fetch the latest tag from Azure Container Registry with error handling
-try {
+<# try {
     $latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv | Select-Object -First 1
 } catch {
     $latestTag = ""
 }
+#>
+
+$ErrorActionPreference = "SilentlyContinue"
+
+try {
+    $acr = Get-AzContainerRegistry -ResourceGroupName <YourResourceGroupName> -Name $registryName
+    $latestTag = (Get-AzContainerRegistryTag -Registry $acr -Repository $repositoryName -MaxTag 1).Tags | Sort-Object -Property TimeCreated -Descending | Select-Object -First 1 -ExpandProperty Tag
+} 
+catch {
+    $latestTag = ""
+}
+
+$latestPatchNumber = 0
 
 $latestPatchNumber = 0
 
