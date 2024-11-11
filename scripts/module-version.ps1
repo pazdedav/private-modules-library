@@ -7,36 +7,24 @@ param (
     [string]$versionPath
 )
 
-# Fetch the latest tag from Azure Container Registry with error handling
-<# try {
-    $latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv | Select-Object -First 1
-} catch {
-    $latestTag = ""
-}
-#>
-
 $ErrorActionPreference = "SilentlyContinue"
 
+# Initialize default version components
+$latestMajor = 0
+$latestMinor = 0
+$latestPatchNumber = 0
+
 try {
-    $acr = Get-AzContainerRegistry -ResourceGroupName 'modules-library-rg' -Name $registryName
-    $latestTag = (Get-AzContainerRegistryTag -Registry $acr -Repository $repositoryName -MaxTag 1).Tags | Sort-Object -Property TimeCreated -Descending | Select-Object -First 1 -ExpandProperty Tag
-} 
-catch {
-    $latestTag = ""
-}
-
-$latestPatchNumber = 0
-
-$latestPatchNumber = 0
-
-if ($latestTag -match '(\d+)\.(\d+)\.(\d+)') {
-    $latestMajor = $matches[1]
-    $latestMinor = $matches[2]
-    $latestPatchNumber = [int]$matches[3]
-}
-else {
-    $latestMajor = 0
-    $latestMinor = 0
+    # Attempt to fetch the latest tag from Azure Container Registry
+    $latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv | Select-Object -First 1
+    
+    if ($latestTag -match '(\d+)\.(\d+)\.(\d+)') {
+        $latestMajor = $matches[1]
+        $latestMinor = $matches[2]
+        $latestPatchNumber = [int]$matches[3]
+    }
+} catch {
+    Write-Host "Repository $repositoryName does not exist in $registryName. Assuming new repository."
 }
 
 # Read the current major and minor versions from version.json

@@ -18,61 +18,57 @@ runs:
   using: 'composite'
   steps:
     - run: |
-        Write-Output "Skipping documentation generation for now."
+        ./scripts/generate-markdown.ps1 -bicepFilePath ${{ inputs.moduleFilePath }} -registryName ${{ inputs.registryName }} -repositoryName ${{ inputs.repositoryName }}
       shell: pwsh
-
-#    - run: |
-#        ./scripts/generate-markdown.ps1 -bicepFilePath ${{ inputs.moduleFilePath }} -registryName ${{ inputs.registryName }} -repositoryName ${{ inputs.repositoryName }}
-#      shell: pwsh
-#
-#    # Configure Git
-#    - name: Configure Git
-#      run: |
-#        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-#        git config --global user.name "GitHub Actions"
-#      shell: bash
-#
-#    # Create feature branch
-#    - name: Create feature branch
-#      run: |
-#        git checkout main
-#        git pull
-#        git checkout -b feature/documentation-update-${{ github.run_id }}
-#      shell: bash
-#
-#    # Add the changes to git
-#    - name: Add changes
-#      run: git add -A
-#      shell: bash
-#
-#    # Commit the changes
-#    - name: Commit changes
-#      run: |
-#        git diff-index --quiet HEAD || git commit -m "Automated documentation update"
-#      shell: bash
-#
-#
-#    - name: Push feature branch
-#      run: |
-#        git fetch origin main:main
-#        git rebase main
-#        git push -u origin feature/documentation-update-${{ github.run_id }}
-#      shell: bash
-#
-#    # Create Pull Request
-#    #- name: Create Pull Request
-#    #  uses: repo-sync/pull-request@v2
-#    #  with:
-#    #    github_token: ${{ inputs.githubSecret}}
-#    #    pr_title: "Automated documentation update"
-#    #    pr_body: "Automatically generated documentation update."
-#    #    source_branch: "feature/documentation-update-${{ github.run_id }}"
-#    #    destination_branch: "main"
-#
-#    # Create PR
-#    - name: Create PR
-#      run: |
-#        gh pr create --title "Automated documentation update - ${{ inputs.repositoryName }}" --body "Automatically generated documentation update." --base main --head feature/documentation-update-${{ github.run_id }}
-#      shell: bash
-#      env:
-#        GH_TOKEN: ${{ github.token }}
+  
+    # Configure Git
+    - name: Configure Git
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "GitHub Actions"
+      shell: bash
+  
+    # Create feature branch
+    - name: Create feature branch
+      run: |
+        git checkout main
+        git pull
+        git checkout -b feature/documentation-update-${{ github.run_id }}
+      shell: bash
+  
+    # Add the changes to git
+    - name: Add changes
+      run: git add -A
+      shell: bash
+  
+    # Commit the changes
+    - name: Commit changes
+      run: |
+        git diff-index --quiet HEAD || git commit -m "Automated documentation update"
+      shell: bash
+  
+  
+    - name: Push feature branch
+      run: |
+        git fetch origin main:main
+        git rebase main
+        git push -u origin feature/documentation-update-${{ github.run_id }}
+      shell: bash
+  
+    # Create Pull Request
+    #- name: Create Pull Request
+    #  uses: repo-sync/pull-request@v2
+    #  with:
+    #    github_token: ${{ inputs.githubSecret}}
+    #    pr_title: "Automated documentation update"
+    #    pr_body: "Automatically generated documentation update."
+    #    source_branch: "feature/documentation-update-${{ github.run_id }}"
+    #    destination_branch: "main"
+  
+    # Create PR
+    - name: Create PR
+      run: |
+        gh pr create --title "Automated documentation update - ${{ inputs.repositoryName }}" --body "Automatically generated documentation update." --base main --head feature/documentation-update-${{ github.run_id }}
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
