@@ -18,7 +18,7 @@ param (
 $ErrorActionPreference = "SilentlyContinue"
 
 try {
-    $acr = Get-AzContainerRegistry -ResourceGroupName <YourResourceGroupName> -Name $registryName
+    $acr = Get-AzContainerRegistry -ResourceGroupName 'modules-library-rg' -Name $registryName
     $latestTag = (Get-AzContainerRegistryTag -Registry $acr -Repository $repositoryName -MaxTag 1).Tags | Sort-Object -Property TimeCreated -Descending | Select-Object -First 1 -ExpandProperty Tag
 } 
 catch {
