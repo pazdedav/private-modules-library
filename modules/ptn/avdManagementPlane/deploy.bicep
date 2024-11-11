@@ -1,5 +1,6 @@
 metadata name = 'AVD - Management Plane'
 metadata description = 'This module deploys a AVD management Plane'
+
 targetScope = 'subscription'
 
 // ========== //
