@@ -54,20 +54,20 @@ runs:
         git push -u origin feature/documentation-update-${{ github.run_id }}
       shell: bash
 
-    # Create Pull Request
-    #- name: Create Pull Request
-    #  uses: repo-sync/pull-request@v2
-    #  with:
-    #    github_token: ${{ inputs.githubSecret}}
-    #    pr_title: "Automated documentation update"
-    #    pr_body: "Automatically generated documentation update."
-    #    source_branch: "feature/documentation-update-${{ github.run_id }}"
-    #    destination_branch: "main" 
+     Create Pull Request
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        github_token: ${{ inputs.githubSecret }}
+        pr_title: "Automated documentation update"
+        pr_body: "Automatically generated documentation update."
+        source_branch: "feature/documentation-update-${{ github.run_id }}"
+        destination_branch: "main" 
   
     # Create PR
-    - name: Create PR
-      run: |
-        gh pr create --title "Automated documentation update - ${{ inputs.repositoryName }}" --body "Automatically generated documentation update." --base main --head feature/documentation-update-${{ github.run_id }}
-      shell: bash
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+    #- name: Create PR
+    #  run: |
+    #    gh pr create --title "Automated documentation update - ${{ inputs.repositoryName }}" --body "Automatically generated documentation update." --base main --head feature/documentation-update-${{ github.run_id }}
+    #  shell: bash
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
