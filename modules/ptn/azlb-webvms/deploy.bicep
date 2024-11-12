@@ -1,6 +1,5 @@
 metadata name = 'VMs and Load Balancer'
 metadata description = 'VNet with internal load balancer and VMs and Bastion Host'
-
 targetScope = 'resourceGroup'
 
 // ========== //
