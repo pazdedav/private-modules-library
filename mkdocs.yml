@@ -27,9 +27,7 @@ nav:
   - Home: index.md
   - Pattern Modules:
     - AVD Management Plane: ptn-avdManagementPlane.md
-  - Resource Modules:
-    - Resources:
-        - Resource Groups: resources-resourceGroups.md
+    - Internal LB with VMs: ptn-azlb-webvms.md
 
 markdown_extensions:
   - admonition
