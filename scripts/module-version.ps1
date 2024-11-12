@@ -7,8 +7,6 @@ param (
     [string]$versionPath
 )
 
-$ErrorActionPreference = "SilentlyContinue"
-
 # Initialize default version components
 $latestMajor = 0
 $latestMinor = 0
@@ -34,21 +32,16 @@ $currentMinor = $version.version.minor
 
 # Determine the next version
 if ($latestMajor -lt $currentMajor -or ($latestMajor -eq $currentMajor -and $latestMinor -lt $currentMinor)) {
-    # If the current major or minor version in version.json is greater than the latest in ACR, start patch at 0
     $newVersion = "$currentMajor.$currentMinor.0"
 }
 elseif ($latestMajor -eq $currentMajor -and $latestMinor -eq $currentMinor) {
-    # If the current major and minor match the latest in ACR, increment the patch number
     $newVersion = "$currentMajor.$currentMinor." + ($latestPatchNumber + 1)
 }
 else {
-    # If no tags found or the version.json specifies a version rollback, default to 0.1.0
-    # This case might occur if there's a need to start over or correct versioning mistakes
     $newVersion = "0.1.0"
 }
 
 Write-Host "New version to publish: $newVersion"
+Write-Output "newVersion=$newVersion"
 
-# Output the new version for use in ADO pipeline variables
-# Write-Host "##vso[task.setvariable variable=newVersion]$newVersion"
-Write-Output "newVersion=$newVersion" >> $env:GITHUB_ENV
+#"newVersion=$newVersion" | Out-File -Append -Encoding utf8 -FilePath $env:GITHUB_ENV
