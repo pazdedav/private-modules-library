@@ -28,6 +28,7 @@ nav:
   - Pattern Modules:
     - AVD Management Plane: ptn-avdManagementPlane.md
     - Internal LB with VMs: ptn-azlb-webvms.md
+    - NIC2024: ptn-nic2024.md
 
 markdown_extensions:
   - admonition
