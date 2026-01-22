@@ -4,7 +4,7 @@ VNet with internal load balancer and VMs and Bastion Host
 
 !!! info "Module reference (latest tag)"
     ```
-    br:modlibbicepreg.azurecr.io/modules/ptn/azlb-webvms:0.1.0
+    br:modlibbicepreg.azurecr.io/modules/ptn/azlb-webvms:0.1.1
     ```
 
 ## Parameters
