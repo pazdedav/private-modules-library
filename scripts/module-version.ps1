@@ -21,7 +21,8 @@ try {
         $latestMinor = $matches[2]
         $latestPatchNumber = [int]$matches[3]
     }
-} catch {
+}
+catch {
     Write-Host "Repository $repositoryName does not exist in $registryName. Assuming new repository."
 }
 
@@ -36,6 +37,10 @@ if ($latestMajor -lt $currentMajor -or ($latestMajor -eq $currentMajor -and $lat
 }
 elseif ($latestMajor -eq $currentMajor -and $latestMinor -eq $currentMinor) {
     $newVersion = "$currentMajor.$currentMinor." + ($latestPatchNumber + 1)
+}
+elseif ($latestMajor -gt $currentMajor -or ($latestMajor -eq $currentMajor -and $latestMinor -gt $currentMinor)) {
+    # If the latest version is greater, you might want to set it to the latest version
+    $newVersion = "$latestMajor.$latestMinor." + ($latestPatchNumber + 1)
 }
 else {
     $newVersion = "0.1.0"
