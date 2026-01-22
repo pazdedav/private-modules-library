@@ -259,5 +259,3 @@ output resourceGroupName string = resourceGroup().name
 // =========== //
 // Types       //
 // =========== //
-
-// Published to ACR registry
