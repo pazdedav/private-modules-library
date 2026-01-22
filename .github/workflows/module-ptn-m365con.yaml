@@ -3,10 +3,14 @@ name: m365con Module CI/CD
 on:
   push:
     branches:
-      - 'feature/*'
-      - 'main'
+      - "main"
     paths:
-      - 'modules/ptn/m365con/deploy.bicep' # Trigger only on changes to the specified module path
+      - "modules/ptn/m365con/deploy.bicep" # Trigger only on changes to the specified module path
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "modules/ptn/m365con/deploy.bicep" # Trigger only on changes to the specified module path
 
 permissions:
   id-token: write
@@ -17,9 +21,9 @@ env:
   ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
   ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
-  MODULE_REPO_NAME: 'modules/ptn/m365con'
-  MODULE_FILE_PATH: 'modules/ptn/m365con/deploy.bicep'
-  MODULE_VERSION_FILE_PATH: 'modules/ptn/m365con/version.json'
+  MODULE_REPO_NAME: "modules/ptn/m365con"
+  MODULE_FILE_PATH: "modules/ptn/m365con/deploy.bicep"
+  MODULE_VERSION_FILE_PATH: "modules/ptn/m365con/version.json"
   MODULE_REGISTRY_NAME: ${{ vars.AZ_MODULE_REGISTRY }} # Adjust as necessary
 
 jobs:
