@@ -14,9 +14,14 @@ $latestPatchNumber = 0
 
 try {
     # Attempt to fetch the latest tag from Azure Container Registry
-    $latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv | Select-Object -First 1
+    $ErrorActionPreference = 'Stop'
+    $latestTag = az acr repository show-tags --name $registryName --repository $repositoryName --orderby time_desc --output tsv 2>&1 | Select-Object -First 1
     
-    if ($latestTag -match '(\d+)\.(\d+)\.(\d+)') {
+    # Check if the result contains an error message
+    if ($latestTag -match 'not found' -or $latestTag -match 'ERROR' -or $LASTEXITCODE -ne 0) {
+        Write-Host "Repository $repositoryName does not exist in $registryName. Assuming new repository."
+    }
+    elseif ($latestTag -match '(\d+)\.(\d+)\.(\d+)') {
         $latestMajor = $matches[1]
         $latestMinor = $matches[2]
         $latestPatchNumber = [int]$matches[3]
