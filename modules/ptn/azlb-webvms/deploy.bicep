@@ -196,5 +196,3 @@ output resourceId string = intLoadBalancer.outputs.resourceId
 // =========== //
 // Types       //
 // =========== //
-
-// Published to ACR registry
