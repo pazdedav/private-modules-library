@@ -196,3 +196,5 @@ output resourceId string = intLoadBalancer.outputs.resourceId
 // =========== //
 // Types       //
 // =========== //
+
+// Published to the Azure Container Registry

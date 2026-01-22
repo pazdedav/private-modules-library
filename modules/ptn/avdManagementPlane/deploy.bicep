@@ -387,3 +387,5 @@ type securityPrincipalGroupsType = {
   @description('Required. The security principal ID to grant RBAC role to access AVD application group.')
   securityPrincipalId: string?
 }[]?
+
+// Published to the Azure Container Registry
